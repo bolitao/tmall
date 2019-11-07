@@ -1,6 +1,7 @@
 package xyz.bolitao.tmall_spring_boot.web;
 
 
+import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author 陶波利
  */
 @Controller
+@Api(tags = "admin 界面跳转")
 public class AdminPageController {
     /**
      * @return 跳转

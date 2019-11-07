@@ -1,5 +1,6 @@
 package xyz.bolitao.tmall_spring_boot.web;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xyz.bolitao.tmall_spring_boot.pojo.Product;
@@ -14,6 +15,7 @@ import java.util.Date;
  * @author bolitao
  */
 @RestController
+@Api(tags = "产品相关")
 public class ProductController {
     @Autowired
     ProductService productService;

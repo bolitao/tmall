@@ -1,5 +1,6 @@
 package xyz.bolitao.tmall_spring_boot.web;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +19,7 @@ import java.io.IOException;
  * @author boli
  */
 @RestController
+@Api(tags = "分类相关")
 public class CategoryController {
     @Autowired
     CategoryService categoryService;

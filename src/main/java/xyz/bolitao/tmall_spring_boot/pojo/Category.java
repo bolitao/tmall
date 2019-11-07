@@ -1,6 +1,8 @@
 package xyz.bolitao.tmall_spring_boot.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
 
 import javax.persistence.*;
 
