@@ -65,12 +65,25 @@
                 alert(text + "不能为空");
                 return false;
             }
-            if (parseInt(value) !== value) {
+            var regex = /^\d+$/;
+            if (!regex.test(value)) {
                 alert(text + "必须是整数");
                 return false;
             }
             return true;
         }
+
+        // function checkInt(value, text) {
+        //     if (value.length === 0) {
+        //         alert(text + "不能为空");
+        //         return false;
+        //     }
+        //     if (parseInt(value) !== value) {
+        //         alert(text + "必须是整数");
+        //         return false;
+        //     }
+        //     return true;
+        // }
 
         // 确实是否要删除
         function checkDeleteLink() {
