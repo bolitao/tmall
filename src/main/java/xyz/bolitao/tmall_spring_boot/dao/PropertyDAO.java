@@ -6,9 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import xyz.bolitao.tmall_spring_boot.pojo.Category;
 import xyz.bolitao.tmall_spring_boot.pojo.Property;
 
+import java.util.List;
+
 /**
  * @author 陶波利
  */
 public interface PropertyDAO extends JpaRepository<Property, Integer> {
     Page<Property> findByCategory(Category category, Pageable pageable);
+
+    List<Property> findByCategory(Category category);
 }

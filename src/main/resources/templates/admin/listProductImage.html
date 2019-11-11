@@ -17,11 +17,10 @@
             detailFile: ''
         };
 
-        //ViewModel
         var vue = new Vue({
             el: '#workingArea',
             data: data4Vue,
-            mounted: function () { //mounted　表示这个 Vue 对象加载成功了
+            mounted: function () {
                 this.listSingles();
                 this.listDetails();
                 this.getProduct(pid);

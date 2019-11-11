@@ -11,6 +11,8 @@ import xyz.bolitao.tmall_spring_boot.pojo.Category;
 import xyz.bolitao.tmall_spring_boot.pojo.Property;
 import xyz.bolitao.tmall_spring_boot.util.Page4Navigator;
 
+import java.util.List;
+
 /**
  * @author 陶波利
  */
@@ -39,7 +41,7 @@ public class PropertyService {
 
 
     /**
-     * 查询某个分类的属性
+     * 查询某个分类的属性（包含分页信息）
      *
      * @param cid           cid
      * @param start         start
@@ -53,5 +55,9 @@ public class PropertyService {
         Pageable pageable = PageRequest.of(start, size, sort);
         Page<Property> pageFromJPA = propertyDAO.findByCategory(category, pageable);
         return new Page4Navigator<>(pageFromJPA, navigatePages);
+    }
+
+    public List<Property> listByCategory(Category category) {
+        return propertyDAO.findByCategory(category);
     }
 }

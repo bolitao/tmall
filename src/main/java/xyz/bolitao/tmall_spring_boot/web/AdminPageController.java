@@ -41,43 +41,37 @@ public class AdminPageController {
     @GetMapping(value = "/admin_order_list")
     public String listOrder() {
         return "admin/listOrder";
-
     }
 
     @GetMapping(value = "/admin_product_list")
     public String listProduct() {
         return "admin/listProduct";
-
     }
 
     @GetMapping(value = "/admin_product_edit")
     public String editProduct() {
         return "admin/editProduct";
-
     }
 
+    @ApiOperation(value = "产品图片显示和编辑")
     @GetMapping(value = "/admin_productImage_list")
     public String listProductImage() {
         return "admin/listProductImage";
-
     }
 
     @GetMapping(value = "/admin_property_list")
     public String listProperty() {
         return "admin/listProperty";
-
     }
 
     @GetMapping(value = "/admin_property_edit")
     public String editProperty() {
         return "admin/editProperty";
-
     }
 
     @GetMapping(value = "/admin_propertyValue_edit")
     public String editPropertyValue() {
         return "admin/editPropertyValue";
-
     }
 
     @GetMapping(value = "/admin_user_list")
