@@ -2,6 +2,7 @@ package xyz.bolitao.tmall_spring_boot.web;
 
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -14,6 +15,7 @@ public class AdminPageController {
     /**
      * @return 跳转
      */
+    @ApiOperation(value = "从 /admin 客户端跳转到 /admin_category_list")
     @GetMapping(value = "/admin")
     public String admin() {
         return "redirect:admin_category_list";
@@ -22,6 +24,7 @@ public class AdminPageController {
     /**
      * @return 服务端跳转到 listCategory.html
      */
+    @ApiOperation(value = "从 /admin_category_list 服务端跳转到 listCategory.html")
     @GetMapping(value = "/admin_category_list")
     public String listCategory() {
         return "admin/listCategory";

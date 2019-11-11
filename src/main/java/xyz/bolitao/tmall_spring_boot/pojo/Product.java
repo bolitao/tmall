@@ -29,6 +29,16 @@ public class Product {
     private float promotePrice;
     private int stock;
     private Date createDate;
+    @Transient // 不和数据库表进行自动关联
+    private ProductImage firstProductImage;
+
+    public ProductImage getFirstProductImage() {
+        return firstProductImage;
+    }
+
+    public void setFirstProductImage(ProductImage firstProductImage) {
+        this.firstProductImage = firstProductImage;
+    }
 
     public int getId() {
         return id;

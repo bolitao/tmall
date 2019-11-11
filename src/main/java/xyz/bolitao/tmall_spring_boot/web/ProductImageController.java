@@ -47,7 +47,7 @@ public class ProductImageController {
         }
     }
 
-    @PostMapping("/productImages")
+    @PostMapping("/productImages") // TODO: LJ
     public Object add(@RequestParam("pid") int pid, @RequestParam("type") String type, MultipartFile image, HttpServletRequest request) throws Exception {
         ProductImage bean = new ProductImage();
         Product product = productService.get(pid);
@@ -86,7 +86,7 @@ public class ProductImageController {
         return bean;
     }
 
-    @DeleteMapping("/productImages/{id}")
+    @DeleteMapping("/productImages/{id}") // TODO: LJ
     public String delete(@PathVariable("id") int id, HttpServletRequest request) throws Exception {
         ProductImage bean = productImageService.get(id);
         productImageService.delete(id);

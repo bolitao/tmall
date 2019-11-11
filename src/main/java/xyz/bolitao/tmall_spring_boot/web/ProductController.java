@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xyz.bolitao.tmall_spring_boot.pojo.Product;
 import xyz.bolitao.tmall_spring_boot.service.CategoryService;
+import xyz.bolitao.tmall_spring_boot.service.ProductImageService;
 import xyz.bolitao.tmall_spring_boot.service.ProductService;
 import xyz.bolitao.tmall_spring_boot.util.Page4Navigator;
 
@@ -21,12 +22,14 @@ public class ProductController {
     ProductService productService;
     @Autowired
     CategoryService categoryService;
+    @Autowired
+    ProductImageService productImageService;
 
     @GetMapping("/categories/{cid}/products")
     public Page4Navigator<Product> list(@PathVariable("cid") int cid, @RequestParam(value = "start", defaultValue = "0") int start, @RequestParam(value = "size", defaultValue = "5") int size) throws Exception {
         start = start < 0 ? 0 : start;
         Page4Navigator<Product> page = productService.list(cid, start, size, 5);
-
+        productImageService.setFirstProductImages(page.getContent()); // TODO: LJ
         return page;
     }
 
