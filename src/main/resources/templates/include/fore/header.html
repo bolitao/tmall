@@ -32,7 +32,7 @@
             }
         }
 
-        function formatMoney(num) { // 金额格式化
+        function formatMoney(num) { // 金额格式化 TODO: 修复负数 bug
             num = new String(num);
             num = num.toString().replace(/\$|\,/g, '');
             if (isNaN(num)) {
