@@ -6,6 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import xyz.bolitao.tmall_spring_boot.pojo.Category;
 import xyz.bolitao.tmall_spring_boot.pojo.Product;
 
+import java.util.List;
+
 public interface ProductDAO extends JpaRepository<Product, Integer> {
     Page<Product> findByCategory(Category category, Pageable pageable);
+
+    List<Product> findByCategoryOrderById(Category category);
 }
