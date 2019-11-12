@@ -14,7 +14,7 @@ import xyz.bolitao.tmall_spring_boot.util.Page4Navigator;
  * @author 陶波利
  */
 @RestController
-@Api(tags = "用户相关")
+@Api(tags = "admin 用户相关")
 public class UserController {
     @Autowired
     UserService userService;

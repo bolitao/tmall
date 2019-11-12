@@ -24,7 +24,7 @@ import java.util.List;
  * @author 陶波利
  */
 @RestController
-@Api(tags = "产品图片")
+@Api(tags = "admin 产品图片")
 public class ProductImageController {
     @Autowired
     ProductService productService;

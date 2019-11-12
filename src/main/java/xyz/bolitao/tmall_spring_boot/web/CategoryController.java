@@ -19,7 +19,7 @@ import java.io.IOException;
  * @author boli
  */
 @RestController
-@Api(tags = "分类相关")
+@Api(tags = "admin 分类相关")
 public class CategoryController {
     @Autowired
     CategoryService categoryService;

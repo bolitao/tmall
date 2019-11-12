@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author 陶波利
  */
 @RestController
-@Api(tags = "产品属性相关", value = "This is value.")
+@Api(tags = "admin 产品属性相关", value = "This is value.")
 public class PropertyController {
     @Autowired
     PropertyService propertyService;

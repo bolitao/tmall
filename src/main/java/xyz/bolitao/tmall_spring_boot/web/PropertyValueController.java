@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @author 陶波利
  */
-@Api(tags = "产品属性值")
+@Api(tags = "admin 产品属性值")
 @RestController
 public class PropertyValueController {
     @Autowired

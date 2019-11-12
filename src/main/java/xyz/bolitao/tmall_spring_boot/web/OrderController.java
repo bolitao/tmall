@@ -16,7 +16,7 @@ import java.util.Date;
  * @author 陶波利
  */
 @RestController
-@Api(tags = "订单相关")
+@Api(tags = "admin 订单相关")
 public class OrderController {
     @Autowired
     OrderService orderService;

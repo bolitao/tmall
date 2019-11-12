@@ -16,7 +16,7 @@ import java.util.Date;
  * @author bolitao
  */
 @RestController
-@Api(tags = "产品相关")
+@Api(tags = "admin 产品相关")
 public class ProductController {
     @Autowired
     ProductService productService;
