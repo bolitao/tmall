@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * @author 陶波利
  */
@@ -94,7 +96,9 @@ public class ForePageController {
     }
 
     @GetMapping("/forelogout")
-    public String logout() {
+    @ApiOperation(value = "退出")
+    public String logout(HttpSession session) {
+        session.removeAttribute("user");
         return "redirect:home";
     }
 }
