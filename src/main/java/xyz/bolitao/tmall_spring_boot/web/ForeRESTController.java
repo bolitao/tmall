@@ -11,10 +11,7 @@ import xyz.bolitao.tmall_spring_boot.service.*;
 import xyz.bolitao.tmall_spring_boot.util.Result;
 
 import javax.servlet.http.HttpSession;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author 陶波利
@@ -180,5 +177,24 @@ public class ForeRESTController {
     @ApiOperation(value = "立即购买")
     public Object buyOne(int pid, int num, HttpSession session) {
         return buyOneAndAddCart(pid, num, session);
+    }
+
+    @GetMapping("forebuy")
+    @ApiOperation("结算")
+    public Object buy(String[] oiid, HttpSession session) {
+        List<OrderItem> orderItems = new ArrayList<>();
+        float total = 0;
+        for (String strid : oiid) {
+            int id = Integer.parseInt(strid);
+            OrderItem oi = orderItemService.get(id);
+            total += oi.getProduct().getPromotePrice() * oi.getNumber();
+            orderItems.add(oi);
+        }
+        productImageService.setFirstProductImagesOnOrderItems(orderItems);
+        session.setAttribute("ois", orderItems);
+        Map<String, Object> map = new HashMap<>();
+        map.put("orderItems", orderItems);
+        map.put("total", total);
+        return Result.success(map);
     }
 }

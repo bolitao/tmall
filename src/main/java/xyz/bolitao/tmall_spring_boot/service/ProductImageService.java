@@ -3,6 +3,7 @@ package xyz.bolitao.tmall_spring_boot.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.bolitao.tmall_spring_boot.dao.ProductImageDAO;
+import xyz.bolitao.tmall_spring_boot.pojo.OrderItem;
 import xyz.bolitao.tmall_spring_boot.pojo.Product;
 import xyz.bolitao.tmall_spring_boot.pojo.ProductImage;
 
@@ -57,6 +58,12 @@ public class ProductImageService {
     public void setFirstProductImages(List<Product> products) {
         for (Product product : products) {
             setFirstProductImage(product);
+        }
+    }
+
+    public void setFirstProductImagesOnOrderItems(List<OrderItem> ois) {
+        for (OrderItem orderItem : ois) {
+            setFirstProductImage(orderItem.getProduct());
         }
     }
 }
