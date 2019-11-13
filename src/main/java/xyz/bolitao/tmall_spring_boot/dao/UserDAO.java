@@ -7,4 +7,5 @@ import xyz.bolitao.tmall_spring_boot.pojo.User;
  * @author 陶波利
  */
 public interface UserDAO extends JpaRepository<User, Integer> {
+    User findByName(String name);
 }
