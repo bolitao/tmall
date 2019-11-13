@@ -319,4 +319,38 @@ public class ForeRESTController {
         orderService.update(o);
         return Result.success();
     }
+
+    @GetMapping("forereview")
+    @ApiOperation(value = "获得评价界面的数据")
+    public Object review(int oid) { // TODO: 提供对一个订单中所有商品评价的功能（目前只支持第一个商品）
+        Order o = orderService.get(oid);
+        orderItemService.fill(o);
+        orderService.removeOrderFromOrderItem(o);
+        Product p = o.getOrderItems().get(0).getProduct();
+        List<Review> reviews = reviewService.list(p);
+        productService.setSaleAndReviewNumber(p);
+        Map<String, Object> map = new HashMap<>();
+        map.put("p", p);
+        map.put("o", o);
+        map.put("reviews", reviews);
+        return Result.success(map);
+    }
+
+    @PostMapping("foredoreview")
+    @ApiOperation(value = "进行评价")
+    public Object doreview(HttpSession session, int oid, int pid, String content) {
+        Order order = orderService.get(oid);
+        order.setStatus(OrderService.finish);
+        orderService.update(order);
+        Product product = productService.get(pid);
+        content = HtmlUtils.htmlEscape(content);
+        User user = (User) session.getAttribute("user");
+        Review review = new Review();
+        review.setContent(content);
+        review.setProduct(product);
+        review.setCreateDate(new Date());
+        review.setUser(user);
+        reviewService.add(review);
+        return Result.success();
+    }
 }
