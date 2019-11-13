@@ -8,4 +8,6 @@ import xyz.bolitao.tmall_spring_boot.pojo.User;
  */
 public interface UserDAO extends JpaRepository<User, Integer> {
     User findByName(String name);
+
+    User getByNameAndPassword(String name, String password);
 }

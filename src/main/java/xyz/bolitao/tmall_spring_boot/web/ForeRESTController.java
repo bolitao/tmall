@@ -15,6 +15,7 @@ import xyz.bolitao.tmall_spring_boot.service.ProductService;
 import xyz.bolitao.tmall_spring_boot.service.UserService;
 import xyz.bolitao.tmall_spring_boot.util.Result;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -55,5 +56,20 @@ public class ForeRESTController {
         user.setPassword(password);
         userService.add(user);
         return Result.success();
+    }
+
+    @PostMapping("/forelogin")
+    @ApiOperation(value = "用户登录")
+    public Object login(@RequestBody User userParam, HttpSession session) {
+        String name = userParam.getName();
+        name = HtmlUtils.htmlEscape(name);
+        User user = userService.get(name, userParam.getPassword());
+        if (null == user) {
+            String message = "账号密码错误";
+            return Result.fail(message);
+        } else {
+            session.setAttribute("user", user);
+            return Result.success();
+        }
     }
 }
