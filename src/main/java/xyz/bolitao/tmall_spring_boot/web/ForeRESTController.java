@@ -5,11 +5,13 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
+import xyz.bolitao.tmall_spring_boot.comparator.*;
 import xyz.bolitao.tmall_spring_boot.pojo.*;
 import xyz.bolitao.tmall_spring_boot.service.*;
 import xyz.bolitao.tmall_spring_boot.util.Result;
 
 import javax.servlet.http.HttpSession;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,5 +106,35 @@ public class ForeRESTController {
             return Result.success();
         }
         return Result.fail("未登录");
+    }
+
+    @GetMapping("forecategory/{cid}")
+    @ApiOperation(value = "返回按 sort 值排序的分类")
+    public Object category(@PathVariable int cid, String sort) {
+        Category category = categoryService.get(cid);
+        productService.fill(category);
+        productService.setSaleAndReviewNumber(category.getProducts());
+        categoryService.removeCategoryFromProduct(category);
+        if (null != sort) {
+            switch (sort) {
+                case "review":
+                    category.getProducts().sort(new ProductReviewComparator());
+                    break;
+                case "date":
+                    category.getProducts().sort(new ProductDateComparator());
+                    break;
+                case "saleCount":
+                    category.getProducts().sort(new ProductSaleCountComparator());
+                    break;
+                case "price":
+                    category.getProducts().sort(new ProductPriceComparator());
+                    break;
+                case "all":
+                    category.getProducts().sort(new ProductAllComparator());
+                    break;
+                default:
+            }
+        }
+        return category;
     }
 }
