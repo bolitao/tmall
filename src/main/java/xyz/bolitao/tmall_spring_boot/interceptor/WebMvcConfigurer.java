@@ -11,13 +11,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 class WebMvcConfigurer extends WebMvcConfigurerAdapter { // TODO: 替换过时方法
     @Bean
+    public OtherInterceptor getOtherIntercepter() {
+        return new OtherInterceptor();
+    }
+
+    @Bean
     public LoginInterceptor getLoginIntercepter() {
         return new LoginInterceptor();
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(getLoginIntercepter())
-                .addPathPatterns("/**");
+        registry.addInterceptor(getOtherIntercepter()).addPathPatterns("/**");
+        registry.addInterceptor(getLoginIntercepter()).addPathPatterns("/**");
     }
 }
