@@ -48,7 +48,7 @@
 
                     var url = "foredeleteOrderItem?oiid=" + deleteOrderItemid;
                     axios.get(url).then(function (response) {
-                        if (0 == response.data.code) {
+                        if (0 === response.data.code) {
                             $("tr.cartProductItemTR[oiid=" + deleteOrderItemid + "]").hide();
                         } else {
                             location.href = "login";
@@ -59,7 +59,7 @@
 
             $("img.cartProductItemIfSelected").click(function () {
                 var selectit = $(this).attr("selectit")
-                if ("selectit" == selectit) {
+                if ("selectit" === selectit) {
                     $(this).attr("src", "img/site/cartNotSelected.png");
                     $(this).attr("selectit", "false")
                     $(this).parents("tr.cartProductItemTR").css("background-color", "#fff");
@@ -74,7 +74,7 @@
             });
             $("img.selectAllItem").click(function () {
                 var selectit = $(this).attr("selectit")
-                if ("selectit" == selectit) {
+                if ("selectit" === selectit) {
                     $("img.selectAllItem").attr("src", "img/site/cartNotSelected.png");
                     $("img.selectAllItem").attr("selectit", "false")
                     $(".cartProductItemIfSelected").each(function () {
@@ -211,7 +211,7 @@
 
             var url = "forechangeOrderItem?pid=" + pid + "&num=" + num;
             axios.get(url).then(function (response) {
-                if (0 != response.data.code) {
+                if (0 !== response.data.code) {
                     location.href = "login";
                 }
             });
