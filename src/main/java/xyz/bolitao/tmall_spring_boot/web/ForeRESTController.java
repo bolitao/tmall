@@ -204,4 +204,13 @@ public class ForeRESTController {
         buyOneAndAddCart(pid, num, session);
         return Result.success();
     }
+
+    @GetMapping("forecart")
+    @ApiOperation(value = "购物车")
+    public Object cart(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        List<OrderItem> ois = orderItemService.listByUser(user);
+        productImageService.setFirstProductImagesOnOrderItems(ois);
+        return ois;
+    }
 }
