@@ -32,7 +32,7 @@
         function orderPageRegisterListeners() {
             $("a[orderStatus]").click(function () {
                 var orderStatus = $(this).attr("orderStatus");
-                if ('all' == orderStatus) {
+                if ('all' === orderStatus) {
                     $("table[orderStatus]").show();
                 } else {
                     $("table[orderStatus]").hide();
@@ -58,7 +58,7 @@
                 if (deleteOrder) {
                     var uri = "foredeleteOrder?oid=" + deleteOrderid;
                     axios.put(uri).then(function (response) {
-                        if (0 == response.data.code) {
+                        if (0 === response.data.code) {
                             $("table.orderListItemTable[oid=" + deleteOrderid + "]").hide();
                         } else {
                             location.href = "login";

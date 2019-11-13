@@ -290,4 +290,33 @@ public class ForeRESTController {
         orderService.removeOrderFromOrderItem(orders); // 调用该方法以防止返回的 json 数据中 order 和 orderItem 无限嵌套循环
         return orders;
     }
+
+    @GetMapping("foreconfirmPay")
+    @ApiOperation(value = "确认收货")
+    public Object confirmPay(int oid) {
+        Order o = orderService.get(oid);
+        orderItemService.fill(o);
+        orderService.cacl(o);
+        orderService.removeOrderFromOrderItem(o);
+        return o;
+    }
+
+    @GetMapping("foreorderConfirmed")
+    @ApiOperation(value = "确认收货成功，订单状态变为待评价")
+    public Object orderConfirmed(int oid) {
+        Order order = orderService.get(oid);
+        order.setStatus(OrderService.waitReview);
+        order.setConfirmDate(new Date());
+        orderService.update(order);
+        return Result.success();
+    }
+
+    @PutMapping("foredeleteOrder")
+    @ApiOperation(value = "删除订单")
+    public Object deleteOrder(int oid) {
+        Order o = orderService.get(oid);
+        o.setStatus(OrderService.delete);
+        orderService.update(o);
+        return Result.success();
+    }
 }
