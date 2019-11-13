@@ -34,13 +34,13 @@
             $(".addCartLink").click(function () {
                 var url = "forecheckLogin";
                 axios.get(url).then(function (response) {
-                    if (0 == response.data.code) {
+                    if (0 === response.data.code) {
                         var pid = vue.p.id;
                         var num = $(".productNumberSetting").val();
                         var url = "foreaddCart?pid=" + pid + "&num=" + num;
                         axios.get(url).then(function (response) {
                             var result = response.data;
-                            if (0 == result.code) {
+                            if (0 === result.code) {
                                 $(".addCartButton").html("已加入购物车");
                                 $(".addCartButton").attr("disabled", "disabled");
                                 $(".addCartButton").css("background-color", "lightgray")
@@ -56,7 +56,7 @@
             $(".buyLink").click(function () {
                 var url = "forecheckLogin";
                 axios.get(url).then(function (response) {
-                    if (0 == response.data.code) {
+                    if (0 === response.data.code) {
                         var pid = vue.p.id;
                         var num = $(".productNumberSetting").val();
                         var url = "forebuyone?pid=" + pid + "&num=" + num;
@@ -73,12 +73,12 @@
 
             $("button.loginSubmitButton").click(function () {
                 var url = "forelogin";
-                if (0 == vue.user.name.length) {
+                if (0 === vue.user.name.length) {
                     $("span.errorMessage").html("请输入用户名");
                     $("div.loginErrorMessageDiv").css("visibility", "visible");
                     return;
                 }
-                if (0 == vue.user.password.length) {
+                if (0 === vue.user.password.length) {
                     $("span.errorMessage").html("请输入密码");
                     $("div.loginErrorMessageDiv").css("visibility", "visible");
                     return;
@@ -86,7 +86,7 @@
 
                 axios.post(url, vue.user).then(function (response) {
                     var result = response.data;
-                    if (result.code == 0) {
+                    if (result.code === 0) {
                         location.href = "product?pid=" + vue.p.id;
                     } else {
                         $("span.errorMessage").html(result.message);

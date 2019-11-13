@@ -79,7 +79,7 @@ public class ForeRESTController {
 
     @GetMapping("/foreproduct/{pid}")
     @ApiOperation(value = "某产品信息")
-    public Object product(@PathVariable("pid") int pid) {
+    public Object product(@PathVariable("pid") int pid) { // TODO: L
         Product product = productService.get(pid);
         List<ProductImage> productSingleImages = productImageService.listSingleProductImages(product);
         List<ProductImage> productDetailImages = productImageService.listDetailProductImages(product);
@@ -94,5 +94,15 @@ public class ForeRESTController {
         map.put("pvs", propertyValues);
         map.put("reviews", reviews);
         return Result.success(map);
+    }
+
+    @GetMapping("forecheckLogin")
+    @ApiOperation(value = "检查是否登录")
+    public Object checkLogin(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (null != user) {
+            return Result.success();
+        }
+        return Result.fail("未登录");
     }
 }
