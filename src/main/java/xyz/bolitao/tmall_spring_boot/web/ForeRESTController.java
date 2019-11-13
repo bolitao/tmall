@@ -278,4 +278,16 @@ public class ForeRESTController {
         orderService.update(order);
         return order;
     }
+
+    @GetMapping("forebought")
+    @ApiOperation(value = "某用户所有状态不为 deleted 的订单")
+    public Object bought(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (null == user) {
+            return Result.fail("未登录");
+        }
+        List<Order> orders = orderService.listByUserWithoutDelete(user);
+        orderService.removeOrderFromOrderItem(orders); // 调用该方法以防止返回的 json 数据中 order 和 orderItem 无限嵌套循环
+        return orders;
+    }
 }

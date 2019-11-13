@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import xyz.bolitao.tmall_spring_boot.dao.OrderDAO;
 import xyz.bolitao.tmall_spring_boot.pojo.Order;
 import xyz.bolitao.tmall_spring_boot.pojo.OrderItem;
+import xyz.bolitao.tmall_spring_boot.pojo.User;
 import xyz.bolitao.tmall_spring_boot.util.Page4Navigator;
 
 
@@ -78,5 +79,15 @@ public class OrderService {
             total += oi.getProduct().getPromotePrice() * oi.getNumber();
         }
         return total;
+    }
+
+    public List<Order> listByUserAndNotDeleted(User user) {
+        return orderDAO.findByUserAndStatusNotOrderByIdDesc(user, OrderService.delete);
+    }
+
+    public List<Order> listByUserWithoutDelete(User user) {
+        List<Order> orders = listByUserAndNotDeleted(user);
+        orderItemService.fill(orders);
+        return orders;
     }
 }
