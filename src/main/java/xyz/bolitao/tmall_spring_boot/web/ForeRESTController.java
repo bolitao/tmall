@@ -60,7 +60,7 @@ public class ForeRESTController {
 
     @PostMapping("/forelogin")
     @ApiOperation(value = "用户登录")
-    public Object login(@RequestBody User userParam, HttpSession session) {
+    public Object login(@RequestBody User userParam, HttpSession session) { //TODO: 使用 token
         String name = userParam.getName();
         name = HtmlUtils.htmlEscape(name);
         User user = userService.get(name, userParam.getPassword());
@@ -71,5 +71,12 @@ public class ForeRESTController {
             session.setAttribute("user", user);
             return Result.success();
         }
+    }
+
+    @GetMapping("/forelogout")
+    @ApiOperation(value = "退出")
+    public String logout(HttpSession session) {
+        session.removeAttribute("user");
+        return "redirect:home";
     }
 }
