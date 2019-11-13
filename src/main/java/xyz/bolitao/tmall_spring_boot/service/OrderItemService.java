@@ -6,6 +6,7 @@ import xyz.bolitao.tmall_spring_boot.dao.OrderItemDAO;
 import xyz.bolitao.tmall_spring_boot.pojo.Order;
 import xyz.bolitao.tmall_spring_boot.pojo.OrderItem;
 import xyz.bolitao.tmall_spring_boot.pojo.Product;
+import xyz.bolitao.tmall_spring_boot.pojo.User;
 
 import java.util.List;
 
@@ -70,5 +71,13 @@ public class OrderItemService {
             }
         }
         return result;
+    }
+
+    public void add(OrderItem orderItem) {
+        orderItemDAO.save(orderItem);
+    }
+
+    public List<OrderItem> listByUser(User user) {
+        return orderItemDAO.findByUserAndOrderIsNull(user);
     }
 }

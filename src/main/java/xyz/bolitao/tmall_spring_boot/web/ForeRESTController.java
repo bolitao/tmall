@@ -139,6 +139,7 @@ public class ForeRESTController {
     }
 
     @PostMapping("foresearch")
+    @ApiOperation(value = "搜索")
     public Object search(String keyword) {
         if (null == keyword) {
             keyword = "";
@@ -147,5 +148,37 @@ public class ForeRESTController {
         productImageService.setFirstProductImages(ps);
         productService.setSaleAndReviewNumber(ps);
         return ps;
+    }
+
+    private int buyOneAndAddCart(int pid, int num, HttpSession session) { // TODO
+        Product product = productService.get(pid);
+        int orderItemId = 0;
+        User user = (User) session.getAttribute("user");
+        boolean found = false;
+        List<OrderItem> orderItems = orderItemService.listByUser(user);
+        for (OrderItem orderItem : orderItems) {
+            if (orderItem.getProduct().getId() == product.getId()) {
+                orderItem.setNumber(orderItem.getNumber() + num);
+                orderItemService.update(orderItem);
+                found = true;
+                orderItemId = orderItem.getId();
+                break;
+            }
+        }
+        if (!found) {
+            OrderItem orderItem = new OrderItem();
+            orderItem.setUser(user);
+            orderItem.setProduct(product);
+            orderItem.setNumber(num);
+            orderItemService.add(orderItem);
+            orderItemId = orderItem.getId();
+        }
+        return orderItemId;
+    }
+
+    @GetMapping("forebuyone")
+    @ApiOperation(value = "立即购买")
+    public Object buyOne(int pid, int num, HttpSession session) {
+        return buyOneAndAddCart(pid, num, session);
     }
 }
