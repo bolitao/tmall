@@ -1,6 +1,9 @@
 package xyz.bolitao.tmall_spring_boot.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +13,7 @@ import xyz.bolitao.tmall_spring_boot.dao.ProductDAO;
 import xyz.bolitao.tmall_spring_boot.pojo.Category;
 import xyz.bolitao.tmall_spring_boot.pojo.Product;
 import xyz.bolitao.tmall_spring_boot.util.Page4Navigator;
+import xyz.bolitao.tmall_spring_boot.util.SpringContextUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +22,7 @@ import java.util.List;
  * @author 陶波利
  */
 @Service
+@CacheConfig(cacheNames = "products")
 public class ProductService {
     @Autowired
     CategoryService categoryService;
@@ -30,22 +35,27 @@ public class ProductService {
     @Autowired
     ReviewService reviewService;
 
+    @CacheEvict(allEntries = true)
     public void add(Product bean) {
         productDAO.save(bean);
     }
 
+    @CacheEvict(allEntries = true)
     public void delete(int id) {
         productDAO.deleteById(id);
     }
 
+    @Cacheable(key = "'products-one-'+ #p0")
     public Product get(int id) {
         return productDAO.findById(id).get();
     }
 
+    @CacheEvict(allEntries = true)
     public void update(Product bean) {
         productDAO.save(bean);
     }
 
+    @Cacheable(key = "'products-cid-'+#p0+'-page-'+#p1 + '-' + #p2 ")
     public Page4Navigator<Product> list(int cid, int start, int size, int navigatePages) {
         Category category = categoryService.get(cid);
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
@@ -55,7 +65,8 @@ public class ProductService {
     }
 
     public void fill(Category category) {
-        List<Product> products = listByCategory(category);
+        ProductService productService = SpringContextUtil.getBean(ProductService.class);
+        List<Product> products = productService.listByCategory(category);
         productImageService.setFirstProductImages(products);
         category.setProducts(products);
     }
@@ -81,6 +92,7 @@ public class ProductService {
         }
     }
 
+    @Cacheable(key = "'products-cid-'+ #p0.id")
     public List<Product> listByCategory(Category category) {
         return productDAO.findByCategoryOrderById(category);
     }
@@ -102,7 +114,6 @@ public class ProductService {
     public List<Product> search(String keyword, int start, int size) {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         Pageable pageable = PageRequest.of(start, size, sort);
-        List<Product> products = productDAO.findByNameLike("%" + keyword + "%", pageable);
-        return products;
+        return productDAO.findByNameLike("%" + keyword + "%", pageable);
     }
 }
