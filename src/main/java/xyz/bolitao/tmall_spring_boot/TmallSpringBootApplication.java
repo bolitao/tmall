@@ -12,6 +12,7 @@ import xyz.bolitao.tmall_spring_boot.util.PortUtil;
 @EnableCaching
 public class TmallSpringBootApplication {
     static {
+        PortUtil.checkPort(3306, "MySQL");
         PortUtil.checkPort(6379, "Redis Server");
     }
 

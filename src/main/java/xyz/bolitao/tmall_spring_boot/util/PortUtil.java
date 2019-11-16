@@ -20,7 +20,7 @@ public class PortUtil {
 
     public static void checkPort(int port, String server) {
         if (!testPort(port)) {
-            String message = String.format("在端口 %d 未检查到 %s 启动，将会退出...", port, server);
+            String message = String.format("在默认端口 %d 未检查到 %s 启动，将会退出...", port, server);
             System.out.println(message);
             System.exit(1);
         }
