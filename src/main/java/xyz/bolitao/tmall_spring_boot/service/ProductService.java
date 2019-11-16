@@ -111,7 +111,7 @@ public class ProductService {
         }
     }
 
-    public List<Product> search(String keyword, int start, int size) {
+    public List<Product> search(String keyword, int start, int size) { // TODO: 添加搜索支持
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
         Pageable pageable = PageRequest.of(start, size, sort);
         return productDAO.findByNameLike("%" + keyword + "%", pageable);
