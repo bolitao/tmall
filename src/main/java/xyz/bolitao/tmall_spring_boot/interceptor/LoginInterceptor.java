@@ -1,6 +1,8 @@
 package xyz.bolitao.tmall_spring_boot.interceptor;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -33,7 +35,6 @@ public class LoginInterceptor implements HandlerInterceptor {
             throws Exception {
         HttpSession session = httpServletRequest.getSession();
         String contextPath = session.getServletContext().getContextPath();
-        // LOGGER.info("contextPath: " + contextPath);
         String[] requireAuthPages = new String[]{ // 以下是需要登陆才能访问的路径
                 "buy",
                 "alipay",
@@ -61,11 +62,11 @@ public class LoginInterceptor implements HandlerInterceptor {
         String uri = httpServletRequest.getRequestURI();
         uri = StringUtils.remove(uri, contextPath + "/");
         String page = uri;
-        if (beginWith(page, requireAuthPages)) {
-            User user = (User) session.getAttribute("user");
-            if (user == null) {
+        if (beginWith(page, requireAuthPages)) { // 使用 shiro 做登录验证
+            Subject subject = SecurityUtils.getSubject();
+            if (!subject.isAuthenticated()) {
                 httpServletResponse.sendRedirect("login");
-                return false; // 如果访问的是需要验证的页面且没有登陆，则跳转到登录页面
+                return false;
             }
         }
         return true;
