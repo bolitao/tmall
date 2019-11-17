@@ -1,6 +1,5 @@
 package xyz.bolitao.tmall_spring_boot.util;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.ServerSocket;
 
@@ -25,5 +24,4 @@ public class PortUtil {
             System.exit(1);
         }
     }
-
 }
