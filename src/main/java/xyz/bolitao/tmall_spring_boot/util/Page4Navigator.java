@@ -4,10 +4,10 @@ package xyz.bolitao.tmall_spring_boot.util;
  * @author 陶波利
  */
 
+import org.springframework.data.domain.Page;
+
 import java.util.Arrays;
 import java.util.List;
-
-import org.springframework.data.domain.Page;
 
 public class Page4Navigator<T> {
     Page<T> pageFromJPA;

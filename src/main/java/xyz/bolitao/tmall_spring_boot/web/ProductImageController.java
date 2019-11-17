@@ -4,7 +4,6 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import xyz.bolitao.tmall_spring_boot.pojo.Product;
 import xyz.bolitao.tmall_spring_boot.pojo.ProductImage;
 import xyz.bolitao.tmall_spring_boot.service.CategoryService;

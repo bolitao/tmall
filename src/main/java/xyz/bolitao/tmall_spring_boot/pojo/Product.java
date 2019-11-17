@@ -1,7 +1,6 @@
 package xyz.bolitao.tmall_spring_boot.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.util.Date;
