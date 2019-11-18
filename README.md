@@ -2,9 +2,15 @@
 
 仿天猫商城
 
+API: [swagger-ui](https://shop.bolitao.xyz/tmall/swagger-ui.html)
+
+前台 demo：[home](https://shop.bolitao.xyz/tmall)
+
+后台 demo：[admin](https://shop.bolitao.xyz/tmall/admin)
+
 ## 开发
 
-使用 IntelliJ IDEA 或者 Eclipse 的 import from maven 相关功能
+使用 IntelliJ IDEA 或者 Eclipse 的 `new project from existing sources` 相关功能
 
 ## bug
 
@@ -28,3 +34,6 @@ Windows 下 MySQL 不区分大小写，可以不修改。
 
 - 自定义 404
 - JWT
+- 后台登陆验证
+- jar 包方式运行时上传数据持久化
+- redis 自动刷新
