@@ -2,11 +2,11 @@
 
 仿天猫商城
 
-API: [swagger-ui](https://shop.bolitao.xyz/tmall/swagger-ui.html)
+API: [swagger-ui](https://shop.bolitao.xyz/swagger-ui.html)
 
-前台 demo：[home](https://shop.bolitao.xyz/tmall)
+前台 demo：[home](https://shop.bolitao.xyz)
 
-后台 demo：[admin](https://shop.bolitao.xyz/tmall/admin)
+后台 demo：[admin](https://shop.bolitao.xyz/admin)
 
 ## 开发
 
@@ -37,3 +37,4 @@ Windows 下 MySQL 不区分大小写，可以不修改。
 - 后台登陆验证
 - jar 包方式运行时上传数据持久化
 - redis 自动刷新
+- 后台使用 `element-admin`
