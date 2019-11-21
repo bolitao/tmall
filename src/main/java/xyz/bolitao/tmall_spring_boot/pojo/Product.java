@@ -25,7 +25,7 @@ public class Product {
     private String name;
     private String subTitle;
     private float originalPrice;
-    private float promotePrice;
+    private float promotePrice; // 折后单价
     private int stock;
     private Date createDate;
 

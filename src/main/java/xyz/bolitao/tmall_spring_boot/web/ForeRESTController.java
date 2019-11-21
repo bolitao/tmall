@@ -252,7 +252,7 @@ public class ForeRESTController {
     }
 
     @GetMapping("foredeleteOrderItem")
-    @ApiOperation(value = "删除购物车中莫商品")
+    @ApiOperation(value = "删除购物车中某商品")
     public Object deleteOrderItem(HttpSession session, int oiid) {
         User user = (User) session.getAttribute("user");
         if (null == user) {

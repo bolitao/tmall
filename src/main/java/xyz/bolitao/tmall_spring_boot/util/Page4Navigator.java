@@ -44,41 +44,25 @@ public class Page4Navigator<T> {
     public Page4Navigator(Page<T> pageFromJPA, int navigatePages) {
         this.pageFromJPA = pageFromJPA;
         this.navigatePages = navigatePages;
-
         totalPages = pageFromJPA.getTotalPages();
-
         number = pageFromJPA.getNumber();
-
         totalElements = pageFromJPA.getTotalElements();
-
         size = pageFromJPA.getSize();
-
         numberOfElements = pageFromJPA.getNumberOfElements();
-
         content = pageFromJPA.getContent();
-
         isHasContent = pageFromJPA.hasContent();
-
         first = pageFromJPA.isFirst();
-
         last = pageFromJPA.isLast();
-
         isHasNext = pageFromJPA.hasNext();
-
         isHasPrevious = pageFromJPA.hasPrevious();
-
         calcNavigatepageNums();
-
     }
 
-    /**
-     * TODO
-     */
     private void calcNavigatepageNums() {
         int[] navigatepageNums;
         int totalPages = getTotalPages();
         int num = getNumber();
-        // 当总页数小于或等于导航页码数时
+        // 总页数小于或等于导航页码数
         if (totalPages <= navigatePages) {
             navigatepageNums = new int[totalPages];
             for (int i = 0; i < totalPages; i++) {
@@ -88,20 +72,19 @@ public class Page4Navigator<T> {
             navigatepageNums = new int[navigatePages];
             int startNum = num - navigatePages / 2;
             int endNum = num + navigatePages / 2;
-
-            if (startNum < 1) {
+            if (startNum < 1) { // eg: num = 2, total = 7
                 startNum = 1;
-                // 最前navigatePages 页
+                // 前 navigatePages 页
                 for (int i = 0; i < navigatePages; i++) {
                     navigatepageNums[i] = startNum++;
                 }
-            } else if (endNum > totalPages) {
+            } else if (endNum > totalPages) { // eg: num = 5, total = 6
                 endNum = totalPages;
-                // 最后 navigatePages 页
+                // 后 navigatePages 页
                 for (int i = navigatePages - 1; i >= 0; i--) {
                     navigatepageNums[i] = endNum--;
                 }
-            } else {
+            } else { // eg: num = 5, total = 10
                 // 所有中间页
                 for (int i = 0; i < navigatePages; i++) {
                     navigatepageNums[i] = startNum++;

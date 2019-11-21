@@ -31,7 +31,7 @@ public class OrderController {
         start = start < 0 ? 0 : start;
         Page4Navigator<Order> page = orderService.list(start, size, 5);
         orderItemService.fill(page.getContent());
-        orderService.removeOrderFromOrderItem(page.getContent());
+        orderService.removeOrderFromOrderItem(page.getContent()); // 避免无限循环
         return page;
     }
 

@@ -27,8 +27,7 @@ public class CategoryService {
 
     public List<Category> list() {
         Sort sort = Sort.by(Sort.Direction.DESC, "id");
-        List<Category> categoryList = categoryDAO.findAll(sort);
-        return categoryList;
+        return categoryDAO.findAll(sort);
     }
 
     @Cacheable(key = "'categories-page-'+#p0+ '-' + #p1")
@@ -51,8 +50,7 @@ public class CategoryService {
 
     @Cacheable(key = "'categories-one-'+ #p0")
     public Category get(int id) {
-        Category category = categoryDAO.findById(id).get();
-        return category;
+        return categoryDAO.findById(id).get();
     }
 
     @CacheEvict(allEntries = true)
@@ -73,7 +71,6 @@ public class CategoryService {
                 product.setCategory(null);
             }
         }
-
         List<List<Product>> productsByRow = category.getProductsByRow();
         if (null != productsByRow) {
             for (List<Product> productList : productsByRow) {

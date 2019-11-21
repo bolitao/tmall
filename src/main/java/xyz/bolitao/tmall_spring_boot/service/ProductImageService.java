@@ -15,8 +15,8 @@ import java.util.List;
  */
 @Service
 public class ProductImageService {
-    public static final String TYPE_SINGLE = "single";
-    public static final String TYPE_DETAIL = "detail";
+    public static final String TYPE_SINGLE = "single"; // 左侧轮播图片
+    public static final String TYPE_DETAIL = "detail"; // 下拉详情图片
 
     @Autowired
     ProductImageDAO productImageDAO;
@@ -61,8 +61,8 @@ public class ProductImageService {
         }
     }
 
-    public void setFirstProductImagesOnOrderItems(List<OrderItem> ois) {
-        for (OrderItem orderItem : ois) {
+    public void setFirstProductImagesOnOrderItems(List<OrderItem> orderItems) {
+        for (OrderItem orderItem : orderItems) {
             setFirstProductImage(orderItem.getProduct());
         }
     }

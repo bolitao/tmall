@@ -1291,14 +1291,14 @@ td.orderItemFirstTD, td.orderItemLastTD {
 
 label.orderItemDeliveryLabel {
     color: #666666;
-    font-family: ����;
+    font-family: sans-serif;
     font-size: 12px;
     font-weight: normal;
 }
 
 select.orderItemDeliverySelect {
-    width: 100px;
-    height: 23px;
+    width: 140px;
+    height: 35px;
 }
 
 div.orderItemSumDiv span {

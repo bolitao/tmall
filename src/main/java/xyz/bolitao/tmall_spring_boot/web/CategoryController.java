@@ -24,6 +24,11 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
+    /**
+     * @param start start
+     * @param size  size
+     * @return page 分页内容和前端需要的导航页数索引
+     */
     @GetMapping("/categories")
     public Page4Navigator<Category> list(@RequestParam(value = "start", defaultValue = "0") int start,
                                          @RequestParam(value = "size", defaultValue = "5") int size) {
@@ -33,7 +38,6 @@ public class CategoryController {
     }
 
     /**
-     * TODO
      * post 方式新增分类
      *
      * @param bean    bean
@@ -51,21 +55,20 @@ public class CategoryController {
 
     /**
      * 保存照片
-     * TODO
      *
      * @param bean    bean
-     * @param image   image
+     * @param uploadedFile   uploadedFile
      * @param request request
      * @throws IOException
      */
-    public void saveOrUpdateImageFile(Category bean, MultipartFile image, HttpServletRequest request)
+    public void saveOrUpdateImageFile(Category bean, MultipartFile uploadedFile, HttpServletRequest request)
             throws IOException {
         File imageFolder = new File(request.getServletContext().getRealPath("img/category"));
         File file = new File(imageFolder, bean.getId() + ".jpg"); // 使用 ID 键做文件名
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }
-        image.transferTo(file);
+        uploadedFile.transferTo(file);
         BufferedImage img = ImageUtil.change2jpg(file); // 转为 jpg
         ImageIO.write(img, "jpg", file);
     }

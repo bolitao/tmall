@@ -28,10 +28,10 @@ public class OrderItemService {
         List<OrderItem> orderItems = listByOrder(order);
         float total = 0;
         int totalNumber = 0;
-        for (OrderItem oi : orderItems) {
-            total += oi.getNumber() * oi.getProduct().getPromotePrice();
-            totalNumber += oi.getNumber();
-            productImageService.setFirstProductImage(oi.getProduct());
+        for (OrderItem orderItem : orderItems) {
+            total += orderItem.getNumber() * orderItem.getProduct().getPromotePrice();
+            totalNumber += orderItem.getNumber();
+            productImageService.setFirstProductImage(orderItem.getProduct());
         }
         order.setTotal(total);
         order.setOrderItems(orderItems);
