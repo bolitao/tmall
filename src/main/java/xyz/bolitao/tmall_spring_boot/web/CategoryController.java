@@ -56,9 +56,9 @@ public class CategoryController {
     /**
      * 保存照片
      *
-     * @param bean    bean
-     * @param uploadedFile   uploadedFile
-     * @param request request
+     * @param bean         bean
+     * @param uploadedFile uploadedFile
+     * @param request      request
      * @throws IOException
      */
     public void saveOrUpdateImageFile(Category bean, MultipartFile uploadedFile, HttpServletRequest request)

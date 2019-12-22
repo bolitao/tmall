@@ -25,10 +25,10 @@ public class RedisConfig extends CachingConfigurerSupport {
     public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
         RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory);
         RedisSerializer<Object> jsonSerializer = new GenericJackson2JsonRedisSerializer();
-        RedisSerializationContext.SerializationPair<Object> pair = RedisSerializationContext.SerializationPair
-                .fromSerializer(jsonSerializer);
-        RedisCacheConfiguration defaultCacheConfig = RedisCacheConfiguration.defaultCacheConfig()
-                .serializeValuesWith(pair);
+        RedisSerializationContext.SerializationPair<Object> pair =
+                RedisSerializationContext.SerializationPair.fromSerializer(jsonSerializer);
+        RedisCacheConfiguration defaultCacheConfig =
+                RedisCacheConfiguration.defaultCacheConfig().serializeValuesWith(pair);
         defaultCacheConfig.entryTtl(Duration.ofSeconds(60 * 60));
         return new RedisCacheManager(redisCacheWriter, defaultCacheConfig);
     }

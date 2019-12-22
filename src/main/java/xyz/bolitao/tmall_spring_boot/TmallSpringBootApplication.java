@@ -11,8 +11,8 @@ import org.springframework.cache.annotation.EnableCaching;
 @EnableCaching
 public class TmallSpringBootApplication {
     static {
-//        PortUtil.checkPort(3306, "MySQL");
-//        PortUtil.checkPort(6379, "Redis Server");
+        // PortUtil.checkPort(3306, "MySQL");
+        // PortUtil.checkPort(6379, "Redis Server");
     }
 
     public static void main(String[] args) {

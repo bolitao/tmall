@@ -22,7 +22,7 @@ API: [swagger-ui.html](https://shop.bolitao.xyz/swagger-ui.html)
 
 4. 程序运行时检测默认 `3306` 和 `6379` 端口，如果您的 `MySQL` 和 `redis` 使用其他端口请注释或修改 `TmallSpringBootApplication` 类中相关检测代码
 
-5. 使用 maven 打包后，使用 `nohup java -jar xxx.jar > xxx.log &` 运行（也可以使用 screen 或者丢到 docker），如果机器内存不够请合理使用 `-XX:MaxHeapSize=xxxM` 参数
+5. 使用 maven 打包后，使用 `nohup java -jar xxx.jar > xxx.log &` 运行（也可使用 screen 等方式），如果机器内存不够请合理使用 `-XX:MaxHeapSize=xxxM` 参数
 
 ## bug
 

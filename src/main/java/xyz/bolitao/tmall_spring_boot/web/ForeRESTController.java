@@ -269,8 +269,7 @@ public class ForeRESTController {
         if (null == user) {
             return Result.fail("未登录");
         }
-        String orderCode = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()) +
-                RandomUtils.nextInt(10000);
+        String orderCode = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()) + RandomUtils.nextInt(10000);
         order.setOrderCode(orderCode);
         order.setCreateDate(new Date());
         order.setUser(user);
